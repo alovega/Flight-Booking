@@ -1,7 +1,11 @@
+from django.conf.urls import url
 from django.urls import path
 
-from . import views
+from .views import BookingFlight
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    url(r'^book-flight/$', BookingFlight.post_flight, name='book flight'),
+    url(r'^flights/$', BookingFlight.get_flight, name='get flights'),
+    url(r'^update-flight/$', BookingFlight.update_flight, name='update flights'),
+    url(r'^delete-flight/$', BookingFlight.delete_flight, name='delete flights'),
 ]
