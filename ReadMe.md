@@ -61,6 +61,7 @@ try and create objects based on the present models
 please go through this materials I think they have tried to make using django as simple as possible
 
 [creating a crud app](https://stackabuse.com/creating-a-rest-api-in-python-with-django)
+<br>
 [django documentation](https://docs.djangoproject.com/en/3.2/)
     
  ## Authors
