@@ -53,6 +53,7 @@ class BookingFlight(object):
             flights_data = []
             for flight in flights:
                 flights_data.append({
+                    'id':flight.id,
                     'to': flight.destination,
                     'from': flight.beginning,
                     'start_date': datetime.datetime.strftime(flight.start_date, "%m/%d/%Y"),
@@ -71,6 +72,31 @@ class BookingFlight(object):
 
             data = {
                 'message': f' Error, {e} '
+            }
+            return JsonResponse(data, status=400)
+
+    @staticmethod
+    @csrf_exempt
+    def get_flight_data(request):
+        try:
+            data = get_request_data(request)
+            pk = data.get('flight_id')
+            flight = Flight.objects.get(id=pk)
+            data = {
+                'id': flight.id,
+                'to': flight.destination,
+                'from': flight.beginning,
+                'start_date': datetime.datetime.strftime(flight.start_date, "%m/%d/%Y"),
+                'return_date': datetime.datetime.strftime(flight.return_date, "%m/%d/%Y"),
+                'adults': flight.adult,
+                'child': flight.children
+            }
+
+            return JsonResponse(data)
+        except Exception as e:
+
+            data = {
+                'message': f' get flight data Error, {e} '
             }
             return JsonResponse(data, status=400)
 
